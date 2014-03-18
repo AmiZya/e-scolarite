@@ -18,9 +18,9 @@ class ImportFormType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options){
 
 		$builder->add("table","choice",array(
-										'empty_value' => 'chosir un la table charger',
+										'empty_value' => 'chosir la table a charger',
 										'multiple' => false,
-										'choices' => array('etudiant' => 'Etudiant', 'filiere' => 'Filiere', 'module' => 'Module', 'note' => 'Note', 'element' => 'Element'),
+										'choices' => array('etudiant' => 'Etudiant', 'note' => 'Note', 'element' => 'Element'),
 										));
 
 		$builder->add('attachement','file');
@@ -28,6 +28,7 @@ class ImportFormType extends AbstractType
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver){
+
 		
 		$resolver->setDefaults(array(
 			'data_class' => 'App\Bundle\BackOfficeBundle\Form\Data\ImportData',

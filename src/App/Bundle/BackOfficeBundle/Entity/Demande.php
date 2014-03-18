@@ -46,9 +46,9 @@ class Demande
     /**
      * @var boolean
      *
-     * @ORM\Column(name="status", type="boolean", nullable=true)
+     * @ORM\Column(name="status", type="boolean", nullable=true, options={"default":0})
      */
-    protected $status;
+    protected $status = 0;
 
     /**
      * @var \DateTime
@@ -67,7 +67,7 @@ class Demande
     /**
      * @var Etudiant
      *
-     * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy="reclamations")
+     * @ORM\ManyToOne(targetEntity="Etudiant", inversedBy="demandes")
      * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id")
      */
     protected $etudiant;

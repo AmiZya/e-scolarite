@@ -1,4 +1,17 @@
+app_front_office:
+    resource: "@AppFrontOfficeBundle/Resources/config/routing.yml"
+    prefix:   /front-office
+
 app_back_office:
     resource: "@AppBackOfficeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /back-office
+
+AppBackOfficeBundle_type-demande:
+        resource: "@AppBackOfficeBundle/Resources/config/routing/typedemande.yml"
+        prefix:   /back-office/configuration/type-demande
+
+AppBackOfficeBundle_type-reclamation:
+    resource: "@AppBackOfficeBundle/Resources/config/routing/typereclamation.yml"
+    prefix:   /back-office/type-reclamation
+
 

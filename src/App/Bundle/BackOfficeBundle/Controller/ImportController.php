@@ -24,24 +24,29 @@ class ImportController extends Controller
 
     public function updateAction(Request $request)
     {
-    	//abdelatif karoum todo here
+    	//abdellatif karroum todo here
         $errors = array();
-
+        
         $form  = $this->createForm(new ImportFormType(),new ImportData());
-
-        $form->handleRequest($request);
 
         if ($request->isMethod('POST')){
 
+            $form->handleRequest($request);
+
+            $validator = $this->get("validator");
             
             $translator  = $this->get('translator');
-            
-            
 
-            if(!$form->isValid()){
-                $errlist = $form->getErrors();
-                foreach ($errlist as $err) {
-                   $errors =  $translator->trans($err);
+            $errList = $validator->validate($form);        
+
+            if(count($errList) > 0){
+            
+                foreach ($errList as $err) {
+                   // trans($id, array $parameters = array(), $domain = null, $locale = null)
+
+                   $errors[] =  $translator->trans($err->getMessage(),array(), 'messages', 'fr_FR');
+
+                
                 }
                 
             }else
@@ -50,9 +55,6 @@ class ImportController extends Controller
         
         }
         
-
-
-
         return $this->render('AppBackOfficeBundle:Import:update.html.twig', array('form' => $form->createView(), 'errors' => $errors));
     }
 
@@ -65,8 +67,8 @@ class ImportController extends Controller
 
         $status = false;
 
-        $attachement = $data['attachement'];
-        $table = $data['table'];
+        $attachement = $data->getAttachement();
+        $table = $data->getTable();
 
         $type = $attachement->guessExtension();
         $filename = $table.uniqid().".".$type;

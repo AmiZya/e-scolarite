@@ -18,7 +18,16 @@ class ImportData
 
 	/**
 	* @var UploadedFile
-	* @Validator\File(uploadErrorMessage = 'errors.import.attachment', mimeTypesMessage = 'errors.import.attachment.mimeTypes', mimeTypes={'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel', 'text/csv'})
+	* @Validator\File(
+	* 	uploadErrorMessage = "errors.import.attachment",
+	* 	mimeTypesMessage = "errors.import.attachment.mimeTypes",
+	* 	mimeTypes={
+	*			   		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+	*   		   		"application/vnd.ms-excel",
+	*              		".csv"
+	*			   }
+	* )
+	* @Validator\NotBlank(message="errors.import.attachment")
 	*/
 	private $attachement;
 
@@ -54,5 +63,4 @@ class ImportData
 	public function getAttachement(){
 		return $this->attachement ;
 	}
-	
 }

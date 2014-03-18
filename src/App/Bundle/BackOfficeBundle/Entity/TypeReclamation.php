@@ -4,6 +4,7 @@ namespace App\Bundle\BackOfficeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Symfony\Component\Validator\Constraints as Validator;
 
 /**
  * TypeReclamation
@@ -26,6 +27,7 @@ class TypeReclamation
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
+     * @Validator\NotBlank(message="errors.typereclamation.code")
      */
     private $code;
 
@@ -33,6 +35,7 @@ class TypeReclamation
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
+     * @Validator\NotBlank(message="errors.typereclamation.libelle")
      */
     private $libelle;
 
@@ -40,6 +43,8 @@ class TypeReclamation
      * @var integer
      *
      * @ORM\Column(name="max_autorise", type="integer", nullable=true)
+     * @Validator\NotBlank(message="errors.typereclamation.maxauto")
+     * @Validator\Type(type="int", message="errors.typereclamation.maxautoint")
      */
     private $maxAutorise;
 
@@ -153,5 +158,9 @@ class TypeReclamation
     */
     public function getReclamations(){
         return $this->reclamations->toArray();
+    }
+
+    public function count(){
+        return $this->reclamations->count();
     }
 }
